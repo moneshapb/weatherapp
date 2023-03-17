@@ -1,8 +1,12 @@
-from flask import Flask, request, render_template
+from flask import Flask, request , render_template 
 import requests
 
 app = Flask(__name__)
-  
+
+@app.route('//')
+@app.route('/weather/<name>')
+def weather(name=None):
+    return render_template('weather.html', name=name)
 @app.route('/', methods =["GET", "POST"])
 def index(): 
     Data = ''
@@ -12,7 +16,7 @@ def index():
         city = request.form.get("city")  
         if city:
             Api_Key = '9d6004d73c651f1cc942a2e38a45d349'
-            url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=" + Api_Key + "&units=metric"
+            url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+Api_Key
             Data = requests.get(url).json()
         else:
             error = 1    

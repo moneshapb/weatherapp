@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Monesha & Muhammed Weather App </title>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<ul class="nav justify-content-center">
+  <li class="n>
+    <a class="nav-link active " href="https://monesha-weather-app.herokuapp.com/">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="item" href="https://monesha-weather-app.herokuapp.com/about">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="item" href="https://monesha-weather-app.herokuapp.com/contact">Contact</a>
+  </li>
+  <style>
+ body {
+background-color: black;
+color: #556b2f;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 40px;
+ }
+
+ h4{
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+color:#004b49 ;
+font-size: 30px;
+
+ }
+
+ .submit{
+  background-color: #00a693;
+ color: antiquewhite;
+
+ }
+
+ .alert{
+   
+    background-color: #72e7b7;
+    color: white;
+    font-size: 20px;
+
+ }
+
+
+ #welcome{
+
+font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+color: #1d2951;
+background-color: white;
+font-size: 60px;
+font-weight: bold;
+ }
+
+
+ #subwelcome{
+
+font-family: 'Times New Roman', Times, serif;
+color: #1d2951;
+font-weight: bolder;
+font-size: 40px;
+
+ }
+
+
+  #item{
+
+background-color: #1d2951;
+font: bolder;
+font-size: 40px;
+color: #556b2f;
+ }
+
+
+
+ .nav-link active
+
+  </style>
+
+</head>
+<body>	
+	<div class="container">
+	    <br><br><br>
+		<div class="row"><h2 id="welcome">Monesha & Muhammed Weather App</h2></div>
+		<br>
+		<div class="row">		   
+			<p id="subwelcome">See weather in Any City Hot or Cold.</p>		   
+		</div>
+		<div class="row">						
+			{% block content %}	                		
+				<form action="{{ url_for("index") }}" method="post">
+				<div class="form-group">
+				<label for="city">City:</label>
+				<input type="text" id="city" name="city" value="{{city}}" placeholder="City">
+				<button class="submit">Search</button>
+				{% if error is defined and error %}
+					<br><br><span class="alert">Error: Please enter valid city.</span></br>
+				{% endif %}
+				</div>				
+        </form>
+        {% if data is defined and data %}
+        <div class="col-md-6">
+          <img src="https://www.saga.co.uk/contentlibrary/saga/publishing/verticals/technology/apps/shutterstock_240459751.jpg" alt="Weather Icon" class="img-fluid">
+
+          <h4>The City is : {{data.city}}</h4>
+          <h4>Country: {{data.country}}</h4>
+          <h4>Description: {{data.description}}</h4>
+          <h4>The Minimum Tempature is: {{data.temp_min}}</h4>
+          <h4>The Maximum Tempature is: {{data.temp_max}}</h4>
+          <h4>The Visibility is: {{data.visibility}}</h4>
+          <h4>The Humidity is: {{data.humidity}}</h4>
+          <h4>The Wind Speed is: {{data.wind_speed}}</h4>
+          <h4>The Wind Direction is: {{data.wind_direction}}</h4>
+   
+        </div>
+        {% endif %}
+              {% endblock %}
+    </div>
+  </div>
+</body>
+</html>
